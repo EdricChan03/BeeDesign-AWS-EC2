@@ -62,17 +62,18 @@ if ($updateDesignFormContainer.length != 0) {
         console.dir('Obtained file id from URL : ', fileId);
         let userId = localStorage.getItem('user_id');
         axios({
-                headers: {
-                    'user': userId
-                },
-                method: 'get',
-                url: baseUrl + '/api/user/design/' + fileId,
-            })
+            headers: {
+                'user': userId
+            },
+            method: 'get',
+            // url: baseUrl + '/api/user/design/' + fileId,
+            url: `https://kdfqpr5dm2.execute-api.us-east-1.amazonaws.com/Dev/files/${fileId}`
+        })
             .then(function(response) {
                 //Using the following to inspect the response.data data structure
                 //before deciding the code which dynamically populate the elements with data.
                 console.dir(response.data);
-                const record = response.data.filedata;
+                const record = response.data;
                 $('#designTitleInput').val(record.design_title).focus();
 
                 $('#fileIdInput').val(record.file_id);
